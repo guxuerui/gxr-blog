@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="LeetCode,算法," />
+  <meta name="keywords" content="JavaScript,前端," />
 
 
 
@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="509. 斐波那契数  斐波那契数，通常用 F(n) 表示，形成的序列称为斐波那契数列。该数列由 0 和 1 开始，后面的每一项数字都是前面两项数字的和。也就是：   F(0) &#x3D; 0,   F(1) &#x3D; 1  F(N) &#x3D; F(N - 1) + F(N - 2), 其中 N &gt; 1.  给定 N，计算 F(N)。 示例 1：  输入：2  输出：1  解释：F(2) &#x3D; F(1) + F(">
+<meta name="description" content="ES6语法可以说是前端开发中最常用的语法了，那么关于map、filter、reduce的基础用法都有那些呢？ mapmap的作用是生成一个新数组，遍历原数组，将每个元素拿出来做一些变换，然后放入到新的数组中。举个栗子: 1[1, 2, 3].map(v &#x3D;&gt; v + 1); &#x2F;&#x2F; [2, 3, 4]  另外，map的回调函数接收三个参数，分别是当前索引元素，索引和原数组。举个栗子: 1[&#39;1">
 <meta property="og:type" content="article">
-<meta property="og:title" content="斐波那契数列">
-<meta property="og:url" content="http://yoursite.com/2020/06/21/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0%E5%88%97/index.html">
+<meta property="og:title" content="map,filter,reduce各有什么作用">
+<meta property="og:url" content="http://yoursite.com/2020/06/23/map-filter-reduce%E5%90%84%E6%9C%89%E4%BB%80%E4%B9%88%E4%BD%9C%E7%94%A8/index.html">
 <meta property="og:site_name" content="骑誓">
-<meta property="og:description" content="509. 斐波那契数  斐波那契数，通常用 F(n) 表示，形成的序列称为斐波那契数列。该数列由 0 和 1 开始，后面的每一项数字都是前面两项数字的和。也就是：   F(0) &#x3D; 0,   F(1) &#x3D; 1  F(N) &#x3D; F(N - 1) + F(N - 2), 其中 N &gt; 1.  给定 N，计算 F(N)。 示例 1：  输入：2  输出：1  解释：F(2) &#x3D; F(1) + F(">
-<meta property="article:published_time" content="2020-06-20T18:11:32.000Z">
-<meta property="article:modified_time" content="2020-06-22T09:09:17.038Z">
+<meta property="og:description" content="ES6语法可以说是前端开发中最常用的语法了，那么关于map、filter、reduce的基础用法都有那些呢？ mapmap的作用是生成一个新数组，遍历原数组，将每个元素拿出来做一些变换，然后放入到新的数组中。举个栗子: 1[1, 2, 3].map(v &#x3D;&gt; v + 1); &#x2F;&#x2F; [2, 3, 4]  另外，map的回调函数接收三个参数，分别是当前索引元素，索引和原数组。举个栗子: 1[&#39;1">
+<meta property="article:published_time" content="2020-06-23T02:01:02.000Z">
+<meta property="article:modified_time" content="2020-06-23T02:51:57.118Z">
 <meta property="article:author" content="骑誓">
-<meta property="article:tag" content="LeetCode">
-<meta property="article:tag" content="算法">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="前端">
 <meta name="twitter:card" content="summary">
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2020/06/21/斐波那契数列/"/>
+  <link rel="canonical" href="http://yoursite.com/2020/06/23/map-filter-reduce各有什么作用/"/>
 
 
 
 
 
-  <title>斐波那契数列 | 骑誓</title>
+  <title>map,filter,reduce各有什么作用 | 骑誓</title>
   
 
 
@@ -264,7 +264,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/21/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0%E5%88%97/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/23/map-filter-reduce%E5%90%84%E6%9C%89%E4%BB%80%E4%B9%88%E4%BD%9C%E7%94%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="骑誓">
@@ -281,7 +281,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">斐波那契数列</h1>
+          <h1 class="post-title" itemprop="name headline">map,filter,reduce各有什么作用</h1>
         
 
         <div class="post-meta">
@@ -293,8 +293,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-21T02:11:32+08:00">
-                2020-06-21
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-23T10:01:02+08:00">
+                2020-06-23
               </time>
             
 
@@ -316,8 +316,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
+                  <a href="/categories/Web%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">Web前端</span>
                   </a>
                 </span>
 
@@ -353,16 +353,26 @@
       
 
       
-        <h2 id="509-斐波那契数"><a href="#509-斐波那契数" class="headerlink" title="509. 斐波那契数"></a>509. 斐波那契数</h2><p>  斐波那契数，通常用 F(n) 表示，形成的序列称为斐波那契数列。该数列由 0 和 1 开始，后面的每一项数字都是前面两项数字的和。也就是：</p>
-<p>  F(0) = 0,   F(1) = 1<br>  F(N) = F(N - 1) + F(N - 2), 其中 N &gt; 1.<br>  给定 N，计算 F(N)。</p>
-<h3 id="示例-1："><a href="#示例-1：" class="headerlink" title="示例 1："></a>示例 1：</h3><p>  输入：2<br>  输出：1<br>  解释：F(2) = F(1) + F(0) = 1 + 0 = 1.</p>
-<h3 id="示例-2："><a href="#示例-2：" class="headerlink" title="示例 2："></a>示例 2：</h3><p>  输入：3<br>  输出：2<br>  解释：F(3) = F(2) + F(1) = 1 + 1 = 2.</p>
-<h3 id="答案看这里哦👇️"><a href="#答案看这里哦👇️" class="headerlink" title="答案看这里哦👇️"></a>答案看这里哦👇️</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fib</span> (<span class="params">num</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (num &lt;= <span class="number">0</span> ) &#123; <span class="keyword">return</span> <span class="number">0</span>;&#125;</span><br><span class="line">  <span class="keyword">if</span> (num === <span class="number">1</span> || num === <span class="number">2</span>) &#123; <span class="keyword">return</span> <span class="number">1</span>;&#125;</span><br><span class="line">  <span class="keyword">if</span> (num &gt; <span class="number">2</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> arr = [<span class="number">0</span>, <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">2</span>; i &lt;= num; i++) &#123;</span><br><span class="line">      arr[i] = arr[i<span class="number">-1</span>] + arr[i<span class="number">-2</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> arr[num];</span><br><span class="line">    <span class="comment">// return arr;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> num = <span class="number">20</span>;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"20的斐波那契数是："</span>,fib(num)); <span class="comment">// 6765</span></span><br></pre></td></tr></table></figure>
+        <p>ES6语法可以说是前端开发中最常用的语法了，那么关于map、filter、reduce的基础用法都有那些呢？</p>
+<h2 id="map"><a href="#map" class="headerlink" title="map"></a>map</h2><p>map的作用是生成一个新数组，遍历原数组，将每个元素拿出来做一些变换，然后放入到新的数组中。<br>举个栗子:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>].map(<span class="function"><span class="params">v</span> =&gt;</span> v + <span class="number">1</span>); <span class="comment">// [2, 3, 4]</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="进一步优化"><a href="#进一步优化" class="headerlink" title="进一步优化"></a>进一步优化</h3><p>通过上面的例子，可以发现有些结果是可以重复利用的，比如fib(3)、fib(4)、fib(5)等等，在计算过程中都会被使用两次，所以可以进一步优化，提高效率。</p>
-<h4 id="第一种"><a href="#第一种" class="headerlink" title="第一种"></a>第一种</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fib  = <span class="function">(<span class="params">num</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (num &lt; <span class="number">2</span>) <span class="keyword">return</span> num;</span><br><span class="line">  <span class="keyword">let</span> prev = <span class="number">1</span>, next = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">3</span>; i &lt;= num; i++) &#123;</span><br><span class="line">    <span class="keyword">let</span> sum = prev + next;</span><br><span class="line">    prev = next;</span><br><span class="line">    next = sum;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> next;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">let</span> num = <span class="number">20</span>;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"20的斐波那契数是："</span>, fib(num)); <span class="comment">// 6765</span></span><br></pre></td></tr></table></figure>
-<h4 id="第二种"><a href="#第二种" class="headerlink" title="第二种"></a>第二种</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fib  = <span class="function">(<span class="params">num</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (num &lt; <span class="number">2</span>) <span class="keyword">return</span> num;</span><br><span class="line">  <span class="keyword">let</span> prev = <span class="number">0</span>, next = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">while</span> (num--) &#123;</span><br><span class="line">    [prev, next] = [next, prev + next];</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> prev;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">let</span> num = <span class="number">20</span>;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"20的斐波那契数是："</span>, fib(num)); <span class="comment">// 6765</span></span><br></pre></td></tr></table></figure>
-<h4 id="第三种"><a href="#第三种" class="headerlink" title="第三种"></a>第三种</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">  <span class="number">0</span>: <span class="number">0</span>,</span><br><span class="line">  <span class="number">1</span>: <span class="number">1</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> fib  = <span class="function">(<span class="params">num</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (obj[num] === <span class="literal">undefined</span>) obj[num] = fib(num - <span class="number">1</span>) + fib(num - <span class="number">2</span>);</span><br><span class="line">  <span class="keyword">return</span> obj[num];</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">let</span> num = <span class="number">20</span>;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"20的斐波那契数是："</span>, fib(num)); <span class="comment">// 6765</span></span><br></pre></td></tr></table></figure>
+<p>另外，map的回调函数接收三个参数，分别是当前索引元素，索引和原数组。<br>举个栗子:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">'1'</span>, <span class="string">'2'</span>, <span class="string">'3'</span>].map(<span class="built_in">parseInt</span>);</span><br></pre></td></tr></table></figure>
+<p>– 第一轮遍历 parseInt(‘1’, 0) -&gt; 1<br>– 第二轮遍历 parseInt(‘2’, 1) -&gt; NaN<br>– 第三轮遍历 parseInt(‘3’, 2) -&gt; NaN</p>
+<p>parseInt()函数可以解析一个字符串，并返回一个整数。<br>语法: parseInt(string, radix)</p>
+<p>其中:<br>string: 必须，要被解析的字符串。<br>radix: 可选，表示要被解析的数字的技术，该值介于 2~36之间。</p>
+<p>如果radix参数省略或值为0，则数字将以10为基础来解析；如果它以”0x”或”0X”来开头，则将以16位基数；如果该值小于2或大于36，则parseInt()将返回NaN。</p>
+<p>PS:<br>(1) 只有字符串中的第一个数字会被返回；<br>(2) 开头和结尾的空格是被允许的；<br>(3) 如果字符串的第一个字符不能被转换为数字，那么parseInt()会返回NaN；</p>
+<h2 id="filter"><a href="#filter" class="headerlink" title="filter"></a>filter</h2><p>filter的作用是生成一个新数组，在遍历数组的时候将返回值为true的元素放入新数组，可以利用这个函数删除一些不需要的元素。<br>举个栗子:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>];</span><br><span class="line"><span class="keyword">let</span> newArr = arr.filter(<span class="function"><span class="params">item</span> =&gt;</span> item !== <span class="number">4</span>);</span><br><span class="line"><span class="built_in">console</span>.log(newArr); <span class="comment">// [1, 2, 3, 5]</span></span><br></pre></td></tr></table></figure>
+<p>filter和map一样，回调函数同样接收三个参数，作用也相同。</p>
+<h2 id="reduce"><a href="#reduce" class="headerlink" title="reduce"></a>reduce</h2><p>reduce可以将数组中的元素通过回调函数最终转换为一个值，比如实现一个功能将函数中的元素全部相加得到一个值:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], total = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">  total += arr[i];</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(total); <span class="comment">// 6</span></span><br></pre></td></tr></table></figure>
+<p>但是如果用reduce的话，可以简化很多:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"><span class="keyword">let</span> total = arr.reduce(<span class="function">(<span class="params">sum, curr</span>) =&gt;</span> sum + curr, <span class="number">0</span>);</span><br><span class="line"><span class="built_in">console</span>.log(total); <span class="comment">// 6</span></span><br></pre></td></tr></table></figure>
+<p>对于reduce来说，它接收两个参数，分别是回调函数和初始值。<br>对于上面的代码来说：<br>– 首先初始值为0，该值会在执行第一次回调函数时作为第一个参数传入<br>– 回调函数接收四个参数，分别是累计值、当前元素、当前索引、原数组<br>– 在第一次执行回调函数时，当前值和初始值相加得出结果1，该结果会在第二次执行回调函数时当做第一个参数传入<br>– 所以在第二次执行回调函数时，相加的值就分别是1和2，以此类推，循环结束后结果是6</p>
+<h3 id="通过reduce来实现一个map函数"><a href="#通过reduce来实现一个map函数" class="headerlink" title="通过reduce来实现一个map函数"></a>通过reduce来实现一个map函数</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"><span class="keyword">const</span> mapArray = arr.map(<span class="function"><span class="params">item</span> =&gt;</span> item * <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> reduceArray = arr.reduce(<span class="function">(<span class="params">acc, curr</span>) =&gt;</span> &#123;</span><br><span class="line">  acc.push(curr * <span class="number">2</span>);</span><br><span class="line">  <span class="keyword">return</span> acc;</span><br><span class="line">&#125;, [])</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(mapArray, reduceArray); <span class="comment">// [2, 3, 6]   [2, 4, 6]</span></span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -388,9 +398,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/LeetCode/" rel="tag"><i class="fa fa-tag"></i> LeetCode</a>
+            <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
           
-            <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"><i class="fa fa-tag"></i> 算法</a>
+            <a href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag"><i class="fa fa-tag"></i> 前端</a>
           
         </div>
       
@@ -403,15 +413,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2020/06/21/%E5%85%B3%E4%BA%8EJS%E4%B8%AD%E7%9A%84%E6%AD%A3%E5%88%99/" rel="next" title="关于JS中的正则">
+                <i class="fa fa-chevron-left"></i> 关于JS中的正则
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/06/21/%E5%85%B3%E4%BA%8EJS%E4%B8%AD%E7%9A%84%E6%AD%A3%E5%88%99/" rel="prev" title="关于JS中的正则">
-                关于JS中的正则 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -543,7 +553,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#509-斐波那契数"><span class="nav-number">1.</span> <span class="nav-text">509. 斐波那契数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#示例-1："><span class="nav-number">1.1.</span> <span class="nav-text">示例 1：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#示例-2："><span class="nav-number">1.2.</span> <span class="nav-text">示例 2：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#答案看这里哦👇️"><span class="nav-number">1.3.</span> <span class="nav-text">答案看这里哦👇️</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进一步优化"><span class="nav-number">1.4.</span> <span class="nav-text">进一步优化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#第一种"><span class="nav-number">1.4.1.</span> <span class="nav-text">第一种</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第二种"><span class="nav-number">1.4.2.</span> <span class="nav-text">第二种</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第三种"><span class="nav-number">1.4.3.</span> <span class="nav-text">第三种</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#map"><span class="nav-number">1.</span> <span class="nav-text">map</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#filter"><span class="nav-number">2.</span> <span class="nav-text">filter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reduce"><span class="nav-number">3.</span> <span class="nav-text">reduce</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#通过reduce来实现一个map函数"><span class="nav-number">3.1.</span> <span class="nav-text">通过reduce来实现一个map函数</span></a></li></ol></li></ol></div>
             
 
           </div>
