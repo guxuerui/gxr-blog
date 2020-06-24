@@ -27,7 +27,7 @@ categories:
   });
   console.log(str); // Tom1 is2 a3 good3 man5
 ```
-### 将单词首字符转化为大写
+### 将单词首字符转化为大写(还可以用JS或CSS实现)
 ```JavaScript
   let str = "we who and who";
   str = str.replace(/\b[a-z]/g, function (kwd) {
