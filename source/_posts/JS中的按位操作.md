@@ -54,7 +54,8 @@ categories:
 ```
 
 ## 活学活用
-不使用四则运算得出两个数的和:
+
+### 不使用四则运算得出两个数的和:
 
 ```JavaScript
   /*
@@ -74,4 +75,16 @@ categories:
 
   const a = 10, b = 15;
   console.log(sum(a, b)); // 25
+```
+
+### 判断2的整数倍
+给定一个整数，编写一个函数来判断它是否是 2 的幂次方。
+因为2的幂次方转换成二进制总是1开头的，类似1000... ，而比它小1的数转换成二进制后总是所有位数都为1，这时两数相与的结果就是0。
+```JavaScript
+  const isPowerOfTwo = (n) => {
+    if(n <= 0) return false;
+    return (n & (n - 1)) === 0;
+  };
+  const num = 16;
+  console.log(isPowerOfTwo(num)); // true
 ```
