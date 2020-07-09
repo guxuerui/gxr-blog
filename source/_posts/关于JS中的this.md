@@ -33,3 +33,34 @@ categories:
 2. 对于obj.foo()来说，只需要记住，谁调用了函数，this就指向谁，所以这时foo函数中的this就是指向obj对象。
 3. 对于new的方式来说，this被永远绑定在了 c 上面，也就是new出来的对象，且不会再被任何方式改变this的指向。
 
+## 箭头函数中的this
+```JavaScript
+  function a () {
+    return () => {
+      return () => {
+        console.log(this);
+      }
+    }
+  }
+  console.log(a()());
+```
+分析:
+首先箭头函数其实是没有this的，箭头函数中的this只取决于包裹箭头函数的第一个普通函数的this。在上栗中，因为包裹箭头函数的第一个普通函数是a，所以this的指向就是window，并且对箭头函数使用bind这类函数是无效的。
+
+## 使用bind、apply、call等API时的this
+
+以bind为例，其它几个类似。
+this取决于bind的第一个参数，如果第一个参数为空，this就指向window。
+那么如果对一个函数多次使用bind，结果会是什么呢？
+```JavaScript
+  let a = {};
+  let fn = function () {
+    console.log(this);
+  }
+  fn.bind().bind(a);
+```
+如果你认为输出的是a，那么就错了。可以将上面代码转换为另一种形式:
+
+```JavaScript
+  
+```
