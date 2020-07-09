@@ -126,5 +126,45 @@ new的方式优先级最高，接下来就是bind这些函数，然后是obj.foo
 
 ### 第二个
 ```JavaScript
+  var name = 0;
+  var a = {
+    name: 1,
+    f1: function(){
+      this.name = 2;
+    },
+    f2: function(){
+      this.name = 3;
+      return null
+    },
+    f3: function(){
+      this.name = 4;
+      return {}
+    },
+    f4: function(){
+      var name = 5;
+      console.log(this.name);
+    },
+    f5: () => {
+      var name = 6;
+      console.log(this.name);
+    }
+  }
   
+  var o1 = new a.f1;
+  console.log(o1.name); // 2
+
+  var o2 = new a.f2();
+  console.log(o2.name); // 3
+
+  var o3 = new a.f3;
+  console.log(o3) // 因为f3中return了{}，此时会正常返回{}，所以o3.name就是undefined
+  console.log(o3.name); // undefined
+
+  a.f4(); // 1
+  f4 = a.f4;
+  f4(); // 0
+  f4.call(a); // 1
+  
+  console.log(a.f5) // 因为a.f5会返回这个箭头函数() => {var name = 6;console.log(this.name);}，而此时箭头函数中的this指向了window，所以a.f5()会返回0
+  a.f5(); // 0
 ```
