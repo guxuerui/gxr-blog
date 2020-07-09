@@ -117,5 +117,6 @@ new的方式优先级最高，接下来就是bind这些函数，然后是obj.foo
       arguments[0]();
     }
   };
-  obj.method(fn, 1)
+  obj.method(fn, 1);
+  // 结果是: 10 2
 ```
