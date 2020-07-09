@@ -10,6 +10,7 @@ categories:
 在日常开发中，我们总是会用到this。那么this到底是什么东东，如何正确判断this呢？
 
 ## 非箭头函数中的this
+全局环境中，this指向window。
 
 举个栗子:
 
@@ -27,11 +28,26 @@ categories:
   obj.foo();
 
   const c = new foo();
+
+  // 将一个对象作为call和apply的第一个参数，this会被绑定到这个对象。
+  var obj = {a: 'Custom'};
+
+  // 这个属性是在global对象定义的。
+  var a = 'Global';
+
+  function whatsThis(arg) {
+    return this.a;  // this的值取决于函数的调用方式
+  }
+
+  whatsThis();          // 'Global'
+  whatsThis.call(obj);  // 'Custom'
+  whatsThis.apply(obj); // 'Custom'
 ```
 分析:
 1. 对于直接调用foo函数来说，不管foo函数被放在了什么地方，this一定是指向window的。
 2. 对于obj.foo()来说，只需要记住，谁调用了函数，this就指向谁，所以这时foo函数中的this就是指向obj对象。
 3. 对于new的方式来说，this被永远绑定在了 c 上面，也就是new出来的对象，且不会再被任何方式改变this的指向。
+4. 将一个对象作为call和apply的第一个参数，this会被绑定到这个对象。
 
 ## 箭头函数中的this
 ```JavaScript
@@ -47,9 +63,8 @@ categories:
 分析:
 首先箭头函数其实是没有this的，箭头函数中的this只取决于包裹箭头函数的第一个普通函数的this。在上栗中，因为包裹箭头函数的第一个普通函数是a，所以this的指向就是window，并且对箭头函数使用bind这类函数是无效的。
 
-## 使用bind、apply、call等API时的this
+## 使用bind函数时的this
 
-以bind为例，其它几个类似。
 this取决于bind的第一个参数，如果第一个参数为空，this就指向window。
 那么如果对一个函数多次使用bind，结果会是什么呢？
 ```JavaScript
@@ -86,5 +101,21 @@ new的方式优先级最高，接下来就是bind这些函数，然后是obj.foo
 有可能会出现多种规则同时存在的情况，这时就会根据不同的规则优先级来决定this的指向。
 
 ## 活学活用
+两道关于this的笔试题。
 
-### 
+### 第一个
+```JavaScript
+  var length = 10;
+  function fn() {
+      console.log(this.length);
+  }
+  
+  var obj = {
+    length: 5,
+    method: function(fn) {
+      fn();
+      arguments[0]();
+    }
+  };
+  obj.method(fn, 1)
+```
