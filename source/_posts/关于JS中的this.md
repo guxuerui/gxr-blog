@@ -120,3 +120,11 @@ new的方式优先级最高，接下来就是bind这些函数，然后是obj.foo
   obj.method(fn, 1);
   // 结果是: 10 2
 ```
+分析:
+1. 在执行obj.method()方法时，如果函数内部有this，那么this确实是指向obj，但是method()内部执行的是fn()函数，而fn()函数绑定的对象是window，即window.fn()，所以会输出10；
+2. 全局函数fn同时也属于arguments数组中的一员，即当作为arguments成员之一调用的时候，其作用域其实就绑定到了arguments上，this也就是指向了arguments对象，所以arguments[0]()这段代码调用了身为成员的fn()函数，this.length就等于是arguments.length，又因为method传入的参数为2个，所以最后又输出2。
+
+### 第二个
+```JavaScript
+  
+```
