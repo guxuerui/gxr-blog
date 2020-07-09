@@ -62,5 +62,24 @@ this取决于bind的第一个参数，如果第一个参数为空，this就指�
 如果你认为输出的是a，那么就错了。可以将上面代码转换为另一种形式:
 
 ```JavaScript
-  
+  // fn.bind().bind(a) 相当于
+  const fn2 = function fn1 () {
+    return function () {
+      retur fn.apply();
+    }.apply(a)
+  }
+  fn2();
 ```
+
+可以发现，不管给函数bind几次，fn中dethis永远由第一次bind决定，所以结果永远是window。
+
+```JavaScript
+  const a = { name: 'gxr' };
+  function foo () {
+    console.log(this.name);
+  }
+  foo.bind(a); // gxr
+```
+
+## 总结
+new的方式优先级最高，接下来就是bind这些函数，
