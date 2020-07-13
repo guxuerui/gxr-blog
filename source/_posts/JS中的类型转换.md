@@ -22,5 +22,21 @@ categories:
 
  ## 强制转换
  ```JavaScript
-  
+  String(123); // '123'
+  String(null); // 'null'
+  String([]); // ''
+  String({}); // '[object object]'
+
+  Number('123'); // 123
+  Number(null); // 0
+  Number([]); // 0
+  Number(undefined); // NaN
+  Number({}); // NaN
+
+  Boolean(123); // true
+  Boolean('123'); // true
+  Boolean([]); // true
+  Boolean({}); // true
+  Boolean(null); // false
+  Boolean(undefined); // false
  ```
