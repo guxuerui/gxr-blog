@@ -54,7 +54,7 @@ categories:
   浅拷贝只解决了第一层的问题，如果接下去的值中还有对象的话，那么就又回到最开始的话题了，两者享有相同的地址。要解决这个问题，我们就得使用深拷贝了。
 
 ## 深拷贝
-1. 通常可以通过 JSON.parse(JSON.stringify(object)) 来解决。
+1. 通常可以通过 JSON.parse(JSON.stringify(object)) 来解决
 ```JavaScript
   let a = {
     age: 1,
@@ -67,7 +67,7 @@ categories:
   console.log(b.jobs.first) // FE
 ```
 
-但是该方法也是有局限性的：
+  但是该方法也是有局限性的：
 
 * 会忽略undefined
 * 会忽略symbol
@@ -75,7 +75,7 @@ categories:
 * 不能解决循环引用的对象
 
 
-2. 如果有这么一个循环引用对象，你会发现并不能通过该方法实现深拷贝，会产生报错。
+2. 如果有这么一个循环引用对象，你会发现并不能通过该方法实现深拷贝，会产生报错
 ```JavaScript
   let obj = {
     a: 1,
@@ -105,4 +105,33 @@ categories:
   console.log(b) // {name: "gxr"}
 ```
 在上述情况中，该方法会忽略掉函数和 undefined、symbol 。
-但是在通常情况下，复杂数据都是可以序列化的，所以这个函数可以解决大部分问题。
+但是在通常情况下，复杂数据都是可以序列化的，所以这个函数可以解决大部分问题
+
+4. 使用MessageChannel
+如果所需拷贝的对象含有内置类型并且不包含函数，可以使用 MessageChannel，MessageChannel API允许我们创建一个新的消息通道，并通过它的两个MessagePort属性发送数据:
+```JavaScript
+  function structuralClone(obj) {
+    return new Promise(resolve => {
+      const { port1, port2 } = new MessageChannel()
+      port2.onmessage = ev => resolve(ev.data)
+      port1.postMessage(obj)
+    })
+  }
+
+  var obj = {
+    a: 1,
+    b: {
+      c: 2
+    }
+  }
+
+  obj.b.d = obj.b
+
+  // 注意该方法是异步的
+  // 可以处理 undefined 和循环引用对象
+  const test = async () => {
+    const clone = await structuralClone(obj)
+    console.log(clone)
+  }
+  test()
+```
