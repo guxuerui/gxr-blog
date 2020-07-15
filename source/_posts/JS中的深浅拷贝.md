@@ -19,3 +19,36 @@ categories:
 ```
 
 ## 浅拷贝
+1. 首先可以通过Object.assign来解决，Object.assign会拷贝所有的属性值到新的对象中，如果属性值是对象的话，拷贝的是地址，所以并不是深拷贝。
+  ```JavaScript
+    let a = {
+      age: 1
+    }
+    let b = Object.assign({}, a)
+    a.age = 2
+    console.log(b.age) // 1
+  ```
+
+2. 还可以通过ES6中的扩展运算符 … 来实现浅拷贝。
+  ```JavaScript
+    let a = {
+      age: 1
+    }
+    let b = { ...a }
+    a.age = 2
+    console.log(b.age) // 1
+  ```
+
+3. 通常浅拷贝就能解决大部分问题了，但当遇到如下情况时就需要使用深拷贝了。
+  ```JavaScript
+    let a = {
+      age: 1,
+      jobs: {
+        first: 'FE'
+      }
+    }
+    let b = { ...a }
+    a.jobs.first = 'native'
+    console.log(b.jobs.first) // native
+  ```
+  浅拷贝只解决了第一层的问题，如果接下去的值中还有对象的话，那么就又回到最开始的话题了，两者享有相同的地址。要解决这个问题，我们就得使用深拷贝了。
