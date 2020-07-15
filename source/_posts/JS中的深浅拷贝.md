@@ -19,7 +19,7 @@ categories:
 ```
 
 ## 浅拷贝
-1. 首先可以通过Object.assign来解决，Object.assign会拷贝所有的属性值到新的对象中，如果属性值是对象的话，拷贝的是地址，所以并不是深拷贝。
+1. 首先可以通过Object.assign来解决，Object.assign会拷贝所有的属性值到新的对象中，如果属性值是对象的话，拷贝的是地址，所以并不是深拷贝
   ```JavaScript
     let a = {
       age: 1
@@ -29,7 +29,7 @@ categories:
     console.log(b.age) // 1
   ```
 
-2. 还可以通过ES6中的扩展运算符 … 来实现浅拷贝。
+2. 还可以通过ES6中的扩展运算符 … 来实现浅拷贝
   ```JavaScript
     let a = {
       age: 1
@@ -39,7 +39,20 @@ categories:
     console.log(b.age) // 1
   ```
 
-3. 通常浅拷贝就能解决大部分问题了，但当遇到如下情况时就需要使用深拷贝了。
+3. 针对数组可使用slice实现浅拷贝
+  ```JavaScript
+    // let arr = [1, 2, 3];
+    // let arr1 = arr.slice();
+    // arr[0] = 10;
+    // console.log(arr, arr1); // [ 10, 2, 3 ] [ 1, 2, 3 ]
+
+    let arr = [1, 2, {a: '1'}];
+    let arr1 = arr.slice();
+    arr[2].a = '456';
+    console.log(arr, arr1); // [1, 2, {a: '456'},  [1, 2, {a: '456'}] 
+  ```
+
+4. 通常浅拷贝就能解决大部分问题了，但当遇到如下情况时就需要使用深拷贝了
   ```JavaScript
     let a = {
       age: 1,
@@ -135,3 +148,28 @@ categories:
   }
   test()
 ```
+
+5. 自己动手实现一个深拷贝
+  ```JavaScript
+    function deepClone(obj){
+      let objClone = Array.isArray(obj) ? [] : {};
+      if(obj && typeof obj === "object"){
+        for(key in obj){
+          if(obj.hasOwnProperty(key)){
+              //判断 obj 子元素是否为对象，如果是，递归拷贝
+            if(obj[key] && typeof obj[key] ==="object"){
+              objClone[key] = deepClone(obj[key]);
+            }else{
+              //如果不是，简单拷贝
+              objClone[key] = obj[key];
+            }
+          }
+        }
+      }
+      return objClone;
+    }
+    let a = [1, 2, 3, {name: 'Tom'}], b = deepClone(a);
+    a[3].name = 'Jack';
+    console.log('a: ', a, 'b: ', b);
+    // // a: [ 1, 2, 3, { name: 'Jack' } ]  b: [ 1, 2, 3, { name: 'Tom' } ]
+  ```
