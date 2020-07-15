@@ -54,7 +54,7 @@ categories:
   浅拷贝只解决了第一层的问题，如果接下去的值中还有对象的话，那么就又回到最开始的话题了，两者享有相同的地址。要解决这个问题，我们就得使用深拷贝了。
 
 ## 深拷贝
-通常可以通过 JSON.parse(JSON.stringify(object)) 来解决。
+1. 通常可以通过 JSON.parse(JSON.stringify(object)) 来解决。
 ```JavaScript
   let a = {
     age: 1,
@@ -73,3 +73,36 @@ categories:
 * 会忽略symbol
 * 不能序列化函数
 * 不能解决循环引用的对象
+
+
+2. 如果有这么一个循环引用对象，你会发现并不能通过该方法实现深拷贝，会产生报错。
+```JavaScript
+  let obj = {
+    a: 1,
+    b: {
+      c: 2,
+      d: 3,
+    },
+  }
+  obj.c = obj.b
+  obj.e = obj.a
+  obj.b.c = obj.c
+  obj.b.d = obj.b
+  obj.b.e = obj.b.c
+  let newObj = JSON.parse(JSON.stringify(obj))
+  console.log(newObj)
+```
+
+3. 在遇到函数、 undefined 或者 symbol 的时候，该对象也不能正常的序列化
+```JavaScript
+  let a = {
+    age: undefined,
+    sex: Symbol('male'),
+    jobs: function() {},
+    name: 'gxr'
+  }
+  let b = JSON.parse(JSON.stringify(a))
+  console.log(b) // {name: "gxr"}
+```
+在上述情况中，该方法会忽略掉函数和 undefined、symbol 。
+但是在通常情况下，复杂数据都是可以序列化的，所以这个函数可以解决大部分问题。
