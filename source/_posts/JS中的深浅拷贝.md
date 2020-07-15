@@ -52,3 +52,24 @@ categories:
     console.log(b.jobs.first) // native
   ```
   浅拷贝只解决了第一层的问题，如果接下去的值中还有对象的话，那么就又回到最开始的话题了，两者享有相同的地址。要解决这个问题，我们就得使用深拷贝了。
+
+## 深拷贝
+通常可以通过 JSON.parse(JSON.stringify(object)) 来解决。
+```JavaScript
+  let a = {
+    age: 1,
+    jobs: {
+      first: 'FE'
+    }
+  }
+  let b = JSON.parse(JSON.stringify(a))
+  a.jobs.first = 'native'
+  console.log(b.jobs.first) // FE
+```
+
+但是该方法也是有局限性的：
+
+* 会忽略undefined
+* 会忽略symbol
+* 不能序列化函数
+* 不能解决循环引用的对象
