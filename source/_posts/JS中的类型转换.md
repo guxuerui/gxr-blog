@@ -52,6 +52,23 @@ categories:
 * 如果需要转字符串类型就调用 x.toString()，转换为基础类型的话就返回转换的值。不是字符串类型的话就先调用 valueOf，结果不是基础类型的话再调用 toString
 * 如果都没有返回原始类型，就会报错
 
+举个栗子:
+```JavaScript
+  let a = {
+    valueOf() {
+      return 0;
+    },
+    toString() {
+      return '1';
+    },
+    [Symbol.toPrimitive]() {
+      return 2;
+    }
+  }
+  1 + a // => 3
+  '1' + a // => '12' // toPrimitive优先级最高, 然后是valueOf方法，最后是toString方法
+```
+
 ## 进行四则运算时
 加法运算符不同于其他几个运算符：
 * 运算中其中一方为字符串，那么就会把另一方也转换为字符串
