@@ -192,3 +192,56 @@ categories:
   [...'hello']
   // [ "h", "e", "l", "l", "o" ]
 ```
+正确返回字符串的长度：
+```JavaScript
+  function length(str) {
+    return [...str].length
+  }
+  length('x\uD83D\uDE80y') // 3
+```
+凡是涉及到操作四个字节的Unicode字符的函数，最好都用扩展字符串改写。
+```JavaScript
+  let str = 'x\uD83D\uDE80y'
+
+  str.split('').reverse().join('')
+  // 'y\uDE80\uD83Dx'
+  
+  [...str].reverse().join('')
+  // 'y\uD83D\uDE80x'
+```
+上面代码中，如果不用扩展运算符，字符串的reverse操作就不正确。
+
+5. 实现了Iterator接口的对象
+任何定义了遍历器（Iterator）接口的对象，都可以用扩展运算符转为真正的数组。
+```JavaScript
+  let nodeList = document.querySelectorAll('div')
+  let array = [...nodeList]
+```
+上面代码中，querySelectorAll方法返回的是一个NodeList对象。它不是数组，而是一个类似数组的对象。这时，扩展运算符可以将其转为真正的数组，原因就在于NodeList对象实现了 Iterator 。
+
+6. map和set结构，Generator函数
+扩展运算符内部调用的是数据结构的 Iterator 接口，因此只要具有 Iterator 接口的对象，都可以使用扩展运算符，比如 Map 结构。
+```JavaScript
+  let map = new Map([
+    [1, 'one'],
+    [2, 'two'],
+    [3, 'three'],
+  ]);
+
+  let arr = [...map.keys()]; // [1, 2, 3]
+```
+Generator 函数运行后，返回一个遍历器对象，因此也可以使用扩展运算符。
+```JavaScript
+  const go = function*(){
+    yield 1;
+    yield 2;
+    yield 3;
+  };
+  
+  [...go()] // [1, 2, 3]
+
+  const obj = {a: 1, b: 2};
+  let arr = [...obj]; // TypeError: Cannot spread non-iterable object
+```
+上面代码中，变量go是一个 Generator 函数，执行后返回的是一个遍历器对象，对这个遍历器对象执行扩展运算符，就会将内部遍历得到的值，转为一个数组。
+**如果对没有 Iterator 接口的对象，使用扩展运算符，将会报错。**

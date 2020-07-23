@@ -256,7 +256,7 @@ categories:
 返回一个数组迭代器对象，该迭代器会包含所有数组元素的值。
 ```JavaScript
   let arr = [1, 2, 3];
-  let iterator = arr.keys(); // Object [Array Iterator] {}
+  let iterator = arr.values(); // Object [Array Iterator] {}
   for (const k of iterator) {
     console.log(k); // 1 2 3
   }
