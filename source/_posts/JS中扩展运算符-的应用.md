@@ -241,7 +241,6 @@ Generator 函数运行后，返回一个遍历器对象，因此也可以使用�
   [...go()] // [1, 2, 3]
 
   const obj = {a: 1, b: 2};
-  let arr = [...obj]; // TypeError: Cannot spread non-iterable object
+  let arr = [...obj]; // TypeError: obj is not iterable
 ```
-上面代码中，变量go是一个 Generator 函数，执行后返回的是一个遍历器对象，对这个遍历器对象执行扩展运算符，就会将内部遍历得到的值，转为一个数组。
-**如果对没有 Iterator 接口的对象，使用扩展运算符，将会报错。**
+上面代码中，变量go是一个 Generator 函数，执行后返回的是一个遍历器对象，对这个遍历器对象执行扩展运算符，就会将内部遍历得到的值，转为一个数组。**如果对没有 Iterator 接口的对象，使用扩展运算符，将会报错。**
