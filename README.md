@@ -3,6 +3,7 @@
 title: Hi Man~
 ---
 This is my personal static blog.
+我的另一个博客: [骑誓](http://www.guxuerui.cn)
 
 ## Quick Start
 
