@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+<meta name="Description" content="作者: 古雪瑞, 博客, 前端, JS, 算法, LeetCode">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="JavaScript,前端," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="一、什么是跨域？因为浏览器出于安全考虑，有同源策略。也就是说，如果协议、域名或者端口有一个不同就会产生跨域，此时Ajax 请求会失败。 同源策略会限制以下几种行为:  cookie、localStorage和indexDB无法读取 DOM和JS对象无法获取 Ajax请求无法发送  常见的解决办法1. JSONPJSONP 的原理很简单，就是利用 &lt;script&gt; 标签没有跨域限制的漏洞">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端跨域及常见的解决办法">
+<meta property="og:url" content="http://yoursite.com/2020/07/31/%E5%89%8D%E7%AB%AF%E8%B7%A8%E5%9F%9F%E5%8F%8A%E5%B8%B8%E8%A7%81%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/index.html">
+<meta property="og:site_name" content="骑誓">
+<meta property="og:description" content="一、什么是跨域？因为浏览器出于安全考虑，有同源策略。也就是说，如果协议、域名或者端口有一个不同就会产生跨域，此时Ajax 请求会失败。 同源策略会限制以下几种行为:  cookie、localStorage和indexDB无法读取 DOM和JS对象无法获取 Ajax请求无法发送  常见的解决办法1. JSONPJSONP 的原理很简单，就是利用 &lt;script&gt; 标签没有跨域限制的漏洞">
+<meta property="article:published_time" content="2020-07-31T09:01:31.000Z">
+<meta property="article:modified_time" content="2020-07-31T09:46:39.137Z">
+<meta property="article:author" content="骑誓">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="前端">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/07/31/前端跨域及常见的解决办法/"/>
+
+
+
+
+
+  <title>前端跨域及常见的解决办法 | 骑誓</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/guxuerui/gxr-blog" target="_blank" rel="noopener" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">骑誓</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">每天进步一点点</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/31/%E5%89%8D%E7%AB%AF%E8%B7%A8%E5%9F%9F%E5%8F%8A%E5%B8%B8%E8%A7%81%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="骑誓">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="骑誓">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">前端跨域及常见的解决办法</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-31T17:01:31+08:00">
+                2020-07-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">Web前端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="一、什么是跨域？"><a href="#一、什么是跨域？" class="headerlink" title="一、什么是跨域？"></a>一、什么是跨域？</h2><p>因为浏览器出于安全考虑，有同源策略。也就是说，如果协议、域名或者端口有一个不同就会产生跨域，此时Ajax 请求会失败。</p>
+<p>同源策略会限制以下几种行为:</p>
+<ol>
+<li>cookie、localStorage和indexDB无法读取</li>
+<li>DOM和JS对象无法获取</li>
+<li>Ajax请求无法发送</li>
+</ol>
+<h2 id="常见的解决办法"><a href="#常见的解决办法" class="headerlink" title="常见的解决办法"></a>常见的解决办法</h2><h3 id="1-JSONP"><a href="#1-JSONP" class="headerlink" title="1. JSONP"></a>1. JSONP</h3><p>JSONP 的原理很简单，就是利用 <code>&lt;script&gt;</code> 标签没有跨域限制的漏洞。当需要通讯时,通过 <code>&lt;script&gt;</code> 标签指向一个需要访问的地址并提供一个回调函数来接收数据。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">"http://domain/api?param1=a&amp;param2=b&amp;callback=jsonp"</span>&gt;&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">&lt;script&gt;</span></span><br><span class="line"><span class="regexp">  function jsonp(data) &#123;</span></span><br><span class="line"><span class="regexp">    console.log(data)</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">&lt;/</span>script&gt;</span><br></pre></td></tr></table></figure>
+<p>JSONP 使用简单且兼容性不错，但是只限于 <code>get</code> 请求。</p>
+<p>在开发中可能会遇到多个 JSONP 请求的回调函数名是相同的，这时候就需要自己封装一个 JSONP，以下是简单实现:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">jsonp</span>(<span class="params">url, jsonpCallback, success</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> script = <span class="built_in">document</span>.createElement(<span class="string">"script"</span>);</span><br><span class="line">  script.src = url;</span><br><span class="line">  script.async = <span class="literal">true</span>;</span><br><span class="line">  script.type = <span class="string">"text/javascript"</span>;</span><br><span class="line">  <span class="built_in">window</span>[jsonpCallback] = <span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">    success &amp;&amp; success(data);</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="built_in">document</span>.body.appendChild(script);</span><br><span class="line">&#125;</span><br><span class="line">jsonp(</span><br><span class="line">  <span class="string">"http://xxx"</span>,</span><br><span class="line">  <span class="string">"callback"</span>,</span><br><span class="line">  <span class="function"><span class="keyword">function</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(value);</span><br><span class="line">  &#125;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-CORS"><a href="#2-CORS" class="headerlink" title="2. CORS"></a>2. CORS</h3><p>CORS需要浏览器和后端同时支持。IE 8 和 9 需要通过 <code>XDomainRequest</code> 来实现。</p>
+<p>浏览器会自动进行 <code>CORS</code> 通信，实现CORS通信的关键是后端。只要后端实现了 <code>CORS</code>，就实现了跨域。</p>
+<p>服务端设置 <code>Access-Control-Allow-Origin</code> 就可以开启 CORS。 该属性表示哪些域名可以访问资源，如果设置通配符则表示所有网站都可以访问资源。</p>
+<h3 id="3-document-domain"><a href="#3-document-domain" class="headerlink" title="3. document.domain"></a>3. document.domain</h3><p>该方式只能用于二级域名相同的情况下，比如 <code>a.test.com</code> 和 <code>b.test.com</code> 适用于该方式。</p>
+<p>只需要给页面添加 <code>document.domain = &#39;test.com&#39;</code> 表示二级域名都相同就可以实现跨域。</p>
+<h3 id="4-postMessage"><a href="#4-postMessage" class="headerlink" title="4. postMessage"></a>4. postMessage</h3><p>这种方式通常用于获取嵌入页面中的第三方页面数据。一个页面发送消息，另一个页面判断来源并接收消息。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 发送消息</span></span><br><span class="line"><span class="built_in">window</span>.parent.postMessage(<span class="string">'message'</span>, <span class="string">'http://test.com'</span>);</span><br><span class="line"><span class="comment">// 接收消息</span></span><br><span class="line"><span class="keyword">const</span> mc = <span class="keyword">new</span> MessageChannel();</span><br><span class="line">mc.addEventListener(<span class="string">'message'</span>, (event) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> origin = event.origin || event.originalEvent.origin;</span><br><span class="line">  <span class="keyword">if</span> (origin === <span class="string">'http://test.com'</span>) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'验证通过'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-nginx代理跨域"><a href="#5-nginx代理跨域" class="headerlink" title="5. nginx代理跨域"></a>5. nginx代理跨域</h3><p>实质和CORS跨域原理一样，通过配置文件设置请求响应 <code>Access-Control-Allow-origin</code> 等字段。</p>
+<p><strong>1. nginx配置解决iconfont跨域</strong><br>浏览器访问js、css、img等常规静态资源是被同源策略许可的，但iconfont字体文件不会，此时可以修改配置文件如下:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">location / &#123;</span><br><span class="line">  add_header Access-Control-Allow-origin *;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>2. nginx反向代理接口跨域</strong><br>原理: 通过nginx配置一个代理服务器域名与domain相同(端口不同)来做跳板，反向代理访问domain2接口，并且可以修改cookie中domain的信息，方便当前域cookie写入，实现跨域访问。<br>配置如下:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">#proxy服务器</span><br><span class="line">server &#123;</span><br><span class="line">  listen   <span class="number">81</span>;</span><br><span class="line">  server_name  www.domain1.com;</span><br><span class="line"></span><br><span class="line">  location / &#123;</span><br><span class="line">    proxy_pass   http:<span class="comment">//www.domain2.com:8080;  #反向代理</span></span><br><span class="line">    proxy_cookie_domain www.domain2.com www.domain1.com; #修改cookie里域名</span><br><span class="line">    index  index.html index.htm;</span><br><span class="line"></span><br><span class="line">    # 当用webpack-dev-server等中间件代理接口访问nignx时，此时无浏览器参与，故没有同源限制，下面的跨域配置可不启用</span><br><span class="line">    add_header Access-Control-Allow-Origin http:<span class="comment">//www.domain1.com;  #当前端只跨域不带cookie时，可为*</span></span><br><span class="line">    add_header Access-Control-Allow-Credentials <span class="literal">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-vue-config-js"><a href="#6-vue-config-js" class="headerlink" title="6. vue.config.js"></a>6. vue.config.js</h3><p>如果是vue-cli创建的vue项目，可以在vue.config.js中配置代理跨域。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">devServer: &#123;</span><br><span class="line">  host: <span class="string">'localhost'</span>,</span><br><span class="line">  port: <span class="number">8080</span>, <span class="comment">// 端口号</span></span><br><span class="line">  hotOnly: <span class="literal">false</span>,</span><br><span class="line">  https: <span class="literal">false</span>, <span class="comment">// https:&#123;type:Boolean&#125;</span></span><br><span class="line">  open: <span class="literal">false</span>, <span class="comment">// 配置自动启动浏览器</span></span><br><span class="line">  proxy: &#123;</span><br><span class="line">    <span class="string">'/api'</span>: &#123;</span><br><span class="line">      target: <span class="string">'http://192.168.1.197:9102/'</span>, <span class="comment">// 这里后台的地址模拟的，使用时应该填写真实的后台接口地址</span></span><br><span class="line">      ws: <span class="literal">true</span>,</span><br><span class="line">      changOrigin: <span class="literal">true</span>, <span class="comment">// 允许跨域</span></span><br><span class="line">      pathRewrite: &#123;</span><br><span class="line">        <span class="string">'^/api'</span>: <span class="string">''</span> <span class="comment">// 请求的时候使用这个api就可以</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="comment">// 配置跨域处理,只有一个代理</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+    <div>
+    
+      <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+    
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
+          
+            <a href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag"><i class="fa fa-tag"></i> 前端</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/07/22/JS%E4%B8%AD%E6%89%A9%E5%B1%95%E8%BF%90%E7%AE%97%E7%AC%A6-%E7%9A%84%E5%BA%94%E7%94%A8/" rel="next" title="JS中扩展运算符(...)的应用">
+                <i class="fa fa-chevron-left"></i> JS中扩展运算符(...)的应用
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">骑誓</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、什么是跨域？"><span class="nav-number">1.</span> <span class="nav-text">一、什么是跨域？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见的解决办法"><span class="nav-number">2.</span> <span class="nav-text">常见的解决办法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-JSONP"><span class="nav-number">2.1.</span> <span class="nav-text">1. JSONP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-CORS"><span class="nav-number">2.2.</span> <span class="nav-text">2. CORS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-document-domain"><span class="nav-number">2.3.</span> <span class="nav-text">3. document.domain</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-postMessage"><span class="nav-number">2.4.</span> <span class="nav-text">4. postMessage</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-nginx代理跨域"><span class="nav-number">2.5.</span> <span class="nav-text">5. nginx代理跨域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-vue-config-js"><span class="nav-number">2.6.</span> <span class="nav-text">6. vue.config.js</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">骑誓</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" rel="noreferrer" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" rel="noreferrer" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
