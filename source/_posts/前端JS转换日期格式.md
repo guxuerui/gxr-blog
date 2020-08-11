@@ -11,7 +11,7 @@ categories:
 
 代码:
 ```JS
-  const fomatDate = (format='Y-M-D h:m', timestamp=Date.now()) => {
+  const formatDate = (format='Y-M-D h:m', timestamp=Date.now()) => {
     const date = new Date(timestamp);
     const dateInfo = {
       Y: date.getFullYear(),
@@ -25,7 +25,7 @@ categories:
     const res = format
       .replace('Y', dateInfo.Y)
       .replace('M', dateInfo.M)
-      .replace('D'. dateInfo.D)
+      .replace('D', dateInfo.D)
       .replace('h', formatNum(dateInfo.h))
       .replace('m', formatNum(dateInfo.m))
       .replace('s', formatNum(dateInfo.s));
@@ -33,6 +33,9 @@ categories:
   }
 ```
 示例:
-```
-  
+```JS
+  formatDate(); // "2020-8-11 15:21"
+  formatDate('M月D日 h:m'); // "8月11日 15:22"
+  formatDate('Y年M月D日 h:m:s'); // "2020年8月11日 15:23:14"
+  formatDate('h:m Y-M-D', 1597130693212); // "15:24 2020-8-11"
 ```
