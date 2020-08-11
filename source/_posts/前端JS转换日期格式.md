@@ -39,3 +39,26 @@ categories:
   formatDate('Y年M月D日 h:m:s'); // "2020年8月11日 15:23:14"
   formatDate('h:m Y-M-D', 1597130693212); // "15:24 2020-8-11"
 ```
+
+**2. 一次性生成一周的时间**
+new Array 创建的数组只是添加了length属性，并没有实际的内容。通过处理后，变为可用数组用于循环。
+代码:
+```JS
+  function getWeekTime(){
+    return [...new Array(7)].map((j,i)=> new Date(Date.now() + i * 8.64e7).toLocaleDateString())
+  }
+```
+
+示例:
+```JS
+  getWeekTime();
+  /*输出:
+    [ '2020-8-11',
+    '2020-8-12',
+    '2020-8-13',
+    '2020-8-14',
+    '2020-8-15',
+    '2020-8-16',
+    '2020-8-17' ]
+  */
+```
